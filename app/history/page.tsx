@@ -6,13 +6,9 @@ import {
   Search, 
   ArrowUpDown, 
   FileText, 
-  CheckCircle2, 
   ExternalLink,
   RotateCcw,
-  MapPin,
-  Car,
-  Beaker,
-  Filter
+  Beaker
 } from 'lucide-react';
 import { fetchTestRecords } from '@/lib/supabase/client';
 import { TestRecord, KitType } from '@/types';
@@ -21,7 +17,7 @@ import { DisclaimerBanner } from '@/components/DisclaimerBanner';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 
 export default function TestHistoryPage() {
-  const { language, t } = useLanguage();
+  const { t } = useLanguage();
   const [tests, setTests] = useState<TestRecord[]>([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);

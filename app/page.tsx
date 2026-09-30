@@ -8,10 +8,8 @@ import {
   ShieldCheck, 
   Camera, 
   Hash, 
-  FileCheck2, 
   Sliders, 
   ArrowRight, 
-  Sparkles,
   Search,
   Lock
 } from 'lucide-react';

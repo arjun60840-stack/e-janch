@@ -20,7 +20,7 @@ import { DisclaimerBanner } from '@/components/DisclaimerBanner';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 
 export default function PublicVerificationPage() {
-  const { language, t } = useLanguage();
+  const { t } = useLanguage();
   const [testIdInput, setTestIdInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [record, setRecord] = useState<TestRecord | null>(null);

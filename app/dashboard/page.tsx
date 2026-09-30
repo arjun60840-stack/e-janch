@@ -7,7 +7,7 @@ import IndiaMap from '@/components/IndiaMap';
 import DetectionTrendChart from '@/components/DetectionTrendChart';
 
 import Link from 'next/link';
-import { Activity, MapPin, TrendingUp, Shield, FileText, CheckCircle2, AlertTriangle } from 'lucide-react';
+import { Activity, TrendingUp, Shield, FileText, CheckCircle2, AlertTriangle } from 'lucide-react';
 import { OperatorProfile, TestRecord } from '@/types';
 
 export default function DashboardPage() {

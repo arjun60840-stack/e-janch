@@ -6,10 +6,7 @@ import {
   RotateCcw, 
   Check, 
   SwitchCamera, 
-  AlertCircle, 
-  FlaskConical, 
-  Sparkles,
-  Layers
+  AlertCircle
 } from 'lucide-react';
 import { DEMO_SAMPLES, generateSyntheticTestKitImage } from '@/lib/demo/sample-kits';
 
@@ -19,7 +16,6 @@ interface CameraCaptureProps {
 
 export const CameraCapture: React.FC<CameraCaptureProps> = ({ onPhotoCaptured }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [cameraActive, setCameraActive] = useState(false);
@@ -55,14 +51,15 @@ export const CameraCapture: React.FC<CameraCaptureProps> = ({ onPhotoCaptured })
         videoRef.current.play();
       }
       setCameraActive(true);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.warn('Camera stream error:', err);
-      if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
+      const error = err instanceof Error ? err : null;
+      if (error?.name === 'NotAllowedError' || error?.name === 'PermissionDeniedError') {
         setCameraError('Camera permission was denied. Please grant camera access in your browser settings. / कैमरा की अनुमति अस्वीकार कर दी गई है।');
-      } else if (err.name === 'NotFoundError' || err.name === 'DevicesNotFoundError') {
+      } else if (error?.name === 'NotFoundError' || error?.name === 'DevicesNotFoundError') {
         setCameraError('No camera found on this device. / इस डिवाइस पर कोई कैमरा नहीं मिला।');
       } else {
-        setCameraError(err.message || 'Unable to open camera stream. / कैमरा स्ट्रीम खोलने में असमर्थ।');
+        setCameraError(error?.message || 'Unable to open camera stream. / कैमरा स्ट्रीम खोलने में असमर्थ।');
       }
       setCameraActive(false);
     }

@@ -58,7 +58,7 @@ const STATE_GEOMETRIES: { name: string; short: string; x: number; y: number; w: 
 ];
 
 export default function IndiaMap({ stateData, onStateClick, selectedState }: IndiaMapProps) {
-  const { language, t } = useLanguage();
+  const { language } = useLanguage();
   const [hoveredState, setHoveredState] = useState<string | null>(null);
 
   // Calculate statistics across states for the Top 5 / Lowest ranking card

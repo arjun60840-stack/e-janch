@@ -4,15 +4,13 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { 
-  User, 
   Shield, 
-  Database, 
   LogOut, 
-  FileText,
-  Save,
-  CheckCircle2,
-  Pen,
-  Languages
+  FileText, 
+  Save, 
+  CheckCircle2, 
+  Pen, 
+  Languages 
 } from 'lucide-react';
 import { 
   getCurrentOperator, 

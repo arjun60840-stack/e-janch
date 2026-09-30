@@ -40,10 +40,10 @@ export async function POST(req: NextRequest) {
       signingVersion: '1.0',
       signedAt: new Date().toISOString(),
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('Record signing error:', err);
     return NextResponse.json(
-      { error: err.message || 'Internal server error during record signing' },
+      { error: err instanceof Error ? err.message : 'Internal server error during record signing' },
       { status: 500 }
     );
   }

@@ -2,18 +2,16 @@
 
 import React from 'react';
 import { CalibrationData, ColorAnalysisResult } from '@/types';
-import { Sliders, SunMedium, CheckCircle2, AlertTriangle, Eye } from 'lucide-react';
+import { Sliders, SunMedium, CheckCircle2, AlertTriangle } from 'lucide-react';
 
 interface ColorCalibrationViewProps {
   calibrationData: CalibrationData;
   colourValues: ColorAnalysisResult;
-  imageUrl: string;
 }
 
 export const ColorCalibrationView: React.FC<ColorCalibrationViewProps> = ({
   calibrationData,
   colourValues,
-  imageUrl,
 }) => {
   const { whiteGain, sampledPatches, qualityMetrics } = calibrationData;
 

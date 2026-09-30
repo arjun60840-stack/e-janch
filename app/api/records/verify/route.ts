@@ -32,10 +32,9 @@ export async function POST(req: NextRequest) {
     hmac.update(`E-JAANCH-V1:${recordHash}`);
     const expectedSignature = hmac.digest('hex');
 
-    const signatureValid = crypto.timingSafeEqual(
-      Buffer.from(signature, 'hex'),
-      Buffer.from(expectedSignature, 'hex')
-    );
+    const sigBuf = Buffer.from(signature, 'hex');
+    const expectedBuf = Buffer.from(expectedSignature, 'hex');
+    const signatureValid = sigBuf.length === expectedBuf.length && crypto.timingSafeEqual(sigBuf, expectedBuf);
 
     const verified = recordHashMatches && signatureValid;
 
@@ -50,14 +49,14 @@ export async function POST(req: NextRequest) {
         ? 'Digital record canonical hash and cryptographic server signature are valid.' 
         : 'Integrity check failed: Record content or signature has been modified.',
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('Record verification error:', err);
     return NextResponse.json(
       {
         verified: false,
         recordHashMatches: false,
         signatureValid: false,
-        error: err.message || 'Error occurred during server verification',
+        error: err instanceof Error ? err.message : 'Error occurred during server verification',
       },
       { status: 500 }
     );

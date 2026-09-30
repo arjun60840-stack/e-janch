@@ -3,9 +3,8 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, ChevronRight, FlaskConical, Shield, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, ChevronRight } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
-import { KIT_DEFINITIONS } from '@/lib/kits/kit-definitions';
 import { KitType } from '@/types';
 
 export default function SelectKitPage() {

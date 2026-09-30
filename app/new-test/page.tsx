@@ -8,7 +8,6 @@ import {
   MapPin, 
   Clock, 
   User, 
-  Camera, 
   CheckCircle2, 
   AlertTriangle, 
   ArrowRight, 
@@ -241,9 +240,9 @@ function NewTestInner() {
       if (!output.calibration_data.referenceDetected) {
         setRefCardError(t.refCardNotDetected);
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Image analysis pipeline failure:', err);
-      setSaveError(err.message || 'Image analysis pipeline failed');
+      setSaveError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
       setAnalyzing(false);
     }
@@ -293,7 +292,7 @@ function NewTestInner() {
       };
 
       // Step D: Generate canonical representation and record hash
-      const { canonicalString, recordHash } = await calculateCanonicalRecordHash(coreRecord as any);
+      const { canonicalString, recordHash } = await calculateCanonicalRecordHash(coreRecord as Parameters<typeof calculateCanonicalRecordHash>[0]);
 
       // Step E: Request cryptographic server signature (HMAC-SHA256)
       const signRes = await fetch('/api/records/sign', {
@@ -359,9 +358,9 @@ function NewTestInner() {
 
       setSavedRecord(fullRecord);
       setCurrentStep(6);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Record finalization error:', err);
-      setSaveError(err.message || 'Failed to finalize and save test record');
+      setSaveError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
       setSaving(false);
     }
@@ -757,8 +756,6 @@ function NewTestInner() {
                 colourValues={analysisOutput.colour_values}
                 reason={analysisOutput.reason}
                 detectedDrug={detectedDrug || analysisOutput.detected_drug}
-                testId={testId}
-                timestamp={currentTimestamp}
               />
 
               {/* Side-by-Side: Image and Color Calibration View */}
@@ -801,7 +798,6 @@ function NewTestInner() {
                   <ColorCalibrationView
                     calibrationData={analysisOutput.calibration_data}
                     colourValues={analysisOutput.colour_values}
-                    imageUrl={capturedDataUrl}
                   />
                 </div>
               </div>

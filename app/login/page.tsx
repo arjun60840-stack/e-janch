@@ -32,8 +32,8 @@ export default function LoginPage() {
       } else {
         setError(res.error || 'Authentication failed. Please verify credentials.');
       }
-    } catch (err: any) {
-      setError(err.message || 'An unexpected error occurred during login');
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'An unexpected error occurred during login');
     } finally {
       setLoading(false);
     }
@@ -49,8 +49,8 @@ export default function LoginPage() {
       if (res.success) {
         router.push('/dashboard');
       }
-    } catch (e: any) {
-      setError(e.message);
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : 'Login failed');
     } finally {
       setLoading(false);
     }

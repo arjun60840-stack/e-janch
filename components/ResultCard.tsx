@@ -5,8 +5,6 @@ import {
   CheckCircle, 
   AlertCircle, 
   HelpCircle, 
-  XCircle, 
-  Info,
   Check
 } from 'lucide-react';
 import { TestResult, QualityScore, ColorAnalysisResult } from '@/types';
@@ -27,8 +25,6 @@ interface ResultCardProps {
   colourValues: ColorAnalysisResult;
   reason: string;
   detectedDrug?: string;
-  testId?: string;
-  timestamp?: string;
   showDisclaimer?: boolean;
   targetScores?: TargetScore[];
 }
@@ -40,14 +36,11 @@ export const ResultCard: React.FC<ResultCardProps> = ({
   colourValues,
   reason,
   detectedDrug,
-  testId,
-  timestamp,
   showDisclaimer = true,
   targetScores,
 }) => {
   const isPositive = result === 'POSITIVE';
   const isNegative = result === 'NEGATIVE';
-  const isInconclusive = result === 'INCONCLUSIVE';
 
   // Fallback target list if not provided
   const primaryDrug = detectedDrug && detectedDrug !== 'None Detected' ? detectedDrug : 'Morphine';

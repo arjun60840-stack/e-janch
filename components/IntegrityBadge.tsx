@@ -7,7 +7,6 @@ import {
   RefreshCw, 
   Copy, 
   Check, 
-  ExternalLink,
   Hash,
   KeyRound,
   FileCheck

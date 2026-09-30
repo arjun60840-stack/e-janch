@@ -5,14 +5,12 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { 
   ArrowLeft, 
-  MapPin, 
   User, 
   Printer, 
   AlertTriangle,
   RotateCcw,
   Car,
   Beaker,
-  Shield,
   Pen
 } from 'lucide-react';
 import { fetchTestById, logAuditEvent } from '@/lib/supabase/client';
@@ -26,8 +24,8 @@ import { useLanguage } from '@/lib/i18n/LanguageContext';
 
 export default function TestDetailPage() {
   const params = useParams();
-  const testId = params.id as string;
-  const { language, t } = useLanguage();
+  const testId = typeof params?.id === 'string' ? params.id : '';
+  const { t } = useLanguage();
 
   const [record, setRecord] = useState<TestRecord | null>(null);
   const [loading, setLoading] = useState(true);
@@ -57,8 +55,8 @@ export default function TestDetailPage() {
             test_id: data.test_id,
           });
         }
-      } catch (e: any) {
-        setError(e.message || 'Error fetching test record');
+      } catch (e: unknown) {
+        setError(e instanceof Error ? e.message : 'Error fetching test record');
       } finally {
         setLoading(false);
       }
@@ -267,8 +265,6 @@ export default function TestDetailPage() {
           colourValues={activeDisplayRecord.colour_values}
           reason={activeDisplayRecord.reason}
           detectedDrug={activeDisplayRecord.detected_drug}
-          testId={activeDisplayRecord.test_id}
-          timestamp={activeDisplayRecord.tested_at}
         />
 
         {/* Cryptographic Tamper-Evident Badge */}
@@ -316,7 +312,6 @@ export default function TestDetailPage() {
             <ColorCalibrationView
               calibrationData={activeDisplayRecord.calibration_data}
               colourValues={activeDisplayRecord.colour_values}
-              imageUrl={activeDisplayRecord.image_url}
             />
           </div>
         </div>
