@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  
+  /* Forensic Theme: White, Saffron, Navy Dark Blue */
+  --color-navy-dark: #071326;
+  --color-navy-primary: #0a1e3f;
+  --color-navy-surface: #0f2b5c;
+  --color-navy-border: #1e3a8a;
+  --color-navy-light: #eff6ff;
+
+  --color-saffron-primary: #ff7722;
+  --color-saffron-dark: #e65100;
+  --color-saffron-light: #fff7ed;
+  --color-saffron-border: #fdba74;
+  --color-saffron-accent: #ff8c00;
+
+  --color-gold-trim: #d4af37;
+}
+
+body {
+  background-color: #f8fafc;
+  color: #0f172a;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Certificate Print Styles */
+@media print {
+  header, nav, footer, .no-print {
+    display: none !important;
+  }
+  body {
+    background: white !important;
+    color: black !important;
+  }
+}
